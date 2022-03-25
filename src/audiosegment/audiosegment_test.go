@@ -53,7 +53,7 @@ import (
 // }
 
 func TestSplitEqual(t *testing.T) {
-	segments, err := SplitEqual("tests/creeley.mp3", 11.5, 1)
+	segments, err := SplitEqual("tests/creeley.mp3", 11.5, 1, 0)
 	assert.Nil(t, err)
 	fmt.Println(segments)
 }
