@@ -37,7 +37,7 @@ func DrumpatchFromAudio(fnameAudio string, startStop []float64) (fnameShort stri
 
 	// generate splits based on silence
 	log.Debug("splitting on silence")
-	segments, err := audiosegment.SplitOnSilence(truncatedWav, -20, 0.3)
+	segments, err := audiosegment.SplitEqual(truncatedWav, -20, 0.3, 0)
 	if err != nil {
 		log.Debug(err)
 		return
@@ -61,7 +61,7 @@ func DrumpatchFromAudio(fnameAudio string, startStop []float64) (fnameShort stri
 	var allSegments [][]audiosegment.AudioSegment
 	for i, mergeSegment := range mergedSegments {
 		var mergedSegmentsSegments, splitMergedSegments []audiosegment.AudioSegment
-		mergedSegmentsSegments, err = audiosegment.SplitOnSilence(mergeSegment.Filename, -20, 0.3)
+		mergedSegmentsSegments, err = audiosegment.SplitEqual(mergeSegment.Filename, -20, 0.3, 0)
 		if err != nil {
 			log.Debug(err)
 			continue
