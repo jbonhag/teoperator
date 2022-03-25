@@ -1,6 +1,7 @@
 package download
 
 import (
+	"os/exec"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -14,6 +15,11 @@ func TestDownloadTooBig(t *testing.T) {
 }
 
 func TestYoutube(t *testing.T) {
-	_, err := Youtube("https://www.youtube.com/watch?v=cssXKXCXdLA", "test.mp3")
+	_, err := exec.LookPath("youtube-dl")
+	if err != nil {
+		t.Skip("youtube-dl not installed")
+	}
+
+	_, err = Youtube("https://www.youtube.com/watch?v=cssXKXCXdLA", "test.mp3")
 	assert.Nil(t, err)
 }
